@@ -114,7 +114,10 @@ class QLearningAgent(ReinforcementAgent):
           it will be called on your behalf
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        current_value = self.getQValue(state, action)
+        to_add = self.alpha * (reward + self.getValue(nextState) * self.discount - current_value)
+        new_value = current_value + to_add
+        self.q_values[(state, action)] = new_value
 
 
 class PacmanQAgent(QLearningAgent):
