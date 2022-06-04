@@ -180,7 +180,7 @@ class ApproximateQAgent(PacmanQAgent):
           where * is the dotProduct operator
         """
         "*** YOUR CODE HERE ***"
-        extracted_features = self.featExtractor.getFeatures(state,action)
+        extracted_features = self.featExtractor.getFeatures(state, action)
         features_lst = []
         for single_feature in extracted_features:
             features_lst.append(extracted_features[single_feature] * self.weights[single_feature])
@@ -195,11 +195,10 @@ class ApproximateQAgent(PacmanQAgent):
         "*** YOUR CODE HERE ***"
         current_value = self.getQValue(state, action)
         correction = (reward + self.getValue(nextState) * self.discount) - current_value
-        extracted_features = self.featExtractor.getFeatures(state,action)
+        extracted_features = self.featExtractor.getFeatures(state, action)
         for single_feature in extracted_features:
-            self.weights[single_feature] += self.alpha*correction*extracted_features[single_feature]
-
-
+            self.weights[single_feature] += self.alpha * correction * extracted_features[
+                single_feature]
 
     def final(self, state):
         "Called at the end of each game."
