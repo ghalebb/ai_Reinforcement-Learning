@@ -84,7 +84,19 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        action_to_return = None
+        if self.mdp.isTerminal(state):
+            return action_to_return
+        all_possible_action = self.mdp.getPossibleActions(state)
+        if len(all_possible_action) == 0:
+            return None
+        max_action_value = -math.inf
+        for single_action in all_possible_action:
+            action_value = self.getQValue(state, single_action)
+            if action_value > max_action_value:
+                max_action_value = action_value
+                action_to_return = single_action
+        return action_to_return
 
     def getAction(self, state):
         "Returns the policy at the state (no exploration)."
